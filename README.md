@@ -33,7 +33,7 @@ sudo docker run \
     --name rpmbuild-centos6 \
     -v /path/to/your/rpmbuild:/home/rpmbuilder/rpmbuild \
     jc21/rpmbuild-centos6 \
-    /bin/build-spec rpmbuild/SPECS/something.spec
+    /bin/build-spec /home/rpmbuilder/rpmbuild/SPECS/something.spec
 ```
 
 Or if you want to build all specs in your SPECS folder:
@@ -66,16 +66,12 @@ if [ "$1" == "" ]; then
 else
     sudo docker run \
         --name rpmbuild-centos6 \
-        -v $RPMBUILDROOT:/rpmbuilder/rpmbuild \
+        -v $RPMBUILDROOT:/home/rpmbuilder/rpmbuild \
+        --rm=true \
         jc21/rpmbuild-centos6 \
-        /bin/build-spec rpmbuild/SPECS/$SPEC
+        /bin/build-spec /home/rpmbuilder/rpmbuild/SPECS/$SPEC
 
-    RESULT=$?
-
-    # Remove the container to use again later
-    sudo docker rm rpmbuild-centos6
-
-    exit $RESULT
+    exit $?
 fi
 ```
 

@@ -1,2 +1,2 @@
-%_topdir    %(echo $HOME)/rpmbuild
-%_tmppath 	%{_topdir}/tmp
+%_topdir    /home/rpmbuilder/rpmbuild
+%_tmppath 	/home/rpmbuilder/rpmbuild/tmp

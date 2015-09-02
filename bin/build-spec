@@ -2,17 +2,17 @@
 
 if [ "$1" == "" ]; then
     echo "Please specify the name of a spec package to build."
-    echo "Example: build-spec nginx.spec" 
-    echo "This command will look for the spec file in ~/rpmbuild/SPECS"
+    echo "Example: build-spec /path/to/rpmbuild/SPECS/nginx.spec" 
 else
     for SPEC in "$@"
     do
         echo "BUILDING: $SPEC"
         cd ~/rpmbuild
-        yum-builddep -y "$SPEC"
+
+        sudo yum-builddep -y "$SPEC"
+        rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
+
         rpmbuild --clean -ba "$SPEC"
-        
-        # exit if bad return code
         rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
     done
 fi
