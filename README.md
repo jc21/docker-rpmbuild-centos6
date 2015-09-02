@@ -32,6 +32,7 @@ If you want to build just one spec in particular:
 sudo docker run \
     --name rpmbuild-centos6 \
     -v /path/to/your/rpmbuild:/home/rpmbuilder/rpmbuild \
+    --rm=true \
     jc21/rpmbuild-centos6 \
     /bin/build-spec /home/rpmbuilder/rpmbuild/SPECS/something.spec
 ```
@@ -42,6 +43,7 @@ Or if you want to build all specs in your SPECS folder:
 sudo docker run \
     --name rpmbuild-centos6 \
     -v /path/to/your/rpmbuild:/home/rpmbuilder/rpmbuild \
+    --rm=true \
     jc21/rpmbuild-centos6 \
     /bin/build-all
 ```
