@@ -1,6 +1,7 @@
 FROM centos:6
 
 MAINTAINER Jamie Curnow <jc@jc21.com>
+LABEL maintainer="Jamie Curnow <jc@jc21.com>"
 
 # Yum
 RUN rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm && \
