@@ -13,7 +13,7 @@ exit 0'''
 IMAGE_NAME="rpmbuild"
 TAG_NAME="el6"
 
-TEMP_IMAGE_NAME="${IMAGE_NAME}-${TAG_NAME}_${bamboo_buildNumber}"
+TEMP_IMAGE_NAME="${IMAGE_NAME}-${TAG_NAME}_${BUILD_NUMBER}"
 FINAL_IMAGE_NAME="${DOCKER_REGISTRY}/${IMAGE_NAME}:${TAG_NAME}"
 
 # Build
@@ -29,7 +29,7 @@ rc=$?; if [ $rc != 0 ]; then exit $rc; fi
 IMAGE_NAME="rpmbuild"
 TAG_NAME="el6"
 
-TEMP_IMAGE_NAME="${IMAGE_NAME}-${TAG_NAME}_${bamboo_buildNumber}"
+TEMP_IMAGE_NAME="${IMAGE_NAME}-${TAG_NAME}_${BUILD_NUMBER}"
 FINAL_IMAGE_NAME="${DOCKER_REGISTRY}/${IMAGE_NAME}:${TAG_NAME}"
 
 # Tag
