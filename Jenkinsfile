@@ -3,7 +3,7 @@ pipeline {
   environment {
     IMAGE_NAME      = "rpmbuild"
     TEMP_IMAGE_NAME = "rpmbuild6_${BUILD_NUMBER}"
-    TAG_VERSION     = "el6"
+    TAG_NAME        = "el6"
   }
   stages {
     stage('Prepare') {
