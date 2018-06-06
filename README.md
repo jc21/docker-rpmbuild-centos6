@@ -2,10 +2,13 @@
 
 This container allows you to use your existing RPM build folders but build within the Centos 6 environment.
 
-The container has:
+## C++11
 
-* EPEL and RPM Fusion repositories
-* Rust cargo build support (nightly)
+This branch contains C++11 compiler. To enable it:
+
+```bash
+docker run --rm -ti docker.int.vision6.com.au/rpmbuild:el6-cpp11 bash -c 'source /opt/rh/devtoolset-2/enable && gcc --version'
+```
 
 ## Setup
 
