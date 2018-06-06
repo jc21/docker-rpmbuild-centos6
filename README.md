@@ -2,11 +2,6 @@
 
 This container allows you to use your existing RPM build folders but build within the Centos 6 environment.
 
-The container has:
-
-* EPEL and RPM Fusion repositories
-* Rust cargo build support (nightly)
-
 ## Setup
 
 You'll need to create your standard RPM build directory structure as follows:
