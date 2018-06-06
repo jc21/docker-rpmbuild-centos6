@@ -6,8 +6,8 @@ pipeline {
   agent any
   environment {
     IMAGE_NAME      = "rpmbuild"
-    TEMP_IMAGE_NAME = "rpmbuild6_${BUILD_NUMBER}"
-    TAG_NAME        = "el6"
+    TEMP_IMAGE_NAME = "rpmbuild6cpp11_${BUILD_NUMBER}"
+    TAG_NAME        = "el6-cpp11"
   }
   stages {
     stage('Prepare') {
