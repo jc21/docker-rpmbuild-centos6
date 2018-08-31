@@ -7,7 +7,7 @@ pipeline {
   environment {
     IMAGE_NAME      = "rpmbuild"
     TEMP_IMAGE_NAME = "rpmbuild6_${BUILD_NUMBER}"
-    TAG_NAME        = "el6"
+    TAG_NAME        = "el6-rust"
   }
   stages {
     stage('Prepare') {
