@@ -13,15 +13,17 @@ function show_help {
     echo "Please specify the name of a spec package to build."
     echo ""
     echo "Usage: $0 [-r dependancy.rpm] /path/to/specfile [/path/to/specfile] [/path/to/specfile]"
-    echo "  -p      Installs specified yum package first"
+    echo "  -u      Uninstalls specified yum package first"
+    echo "  -p      Installs specified yum package next"
     echo "  -r      Installs the specified RPM next"
     echo "  -b      Skip broken packages in RPM install, only applies with -r and/or -p"
+    echo "  -o      Set yum to ignore obsoletes"
     echo ""
     echo "Example: $0 -r RPMS/x86_64/php.rpm -r RPMS/noarch/slack.rpm SPECS/php-memcache.spec"
     echo ""
 }
 
-SHORT=p:br:h
+SHORT=p:u:br:ho
 LONG=help
 
 # -temporarily store output to be able to check for errors
@@ -36,16 +38,26 @@ fi
 # use eval with "$PARSED" to properly handle the quoting
 eval set -- "$PARSED"
 
+upackages=""
 packages=""
 rpmfiles=""
 skip_broken=""
+obsoletes=""
 
 # now enjoy the options in order and nicely split until we see --
 while true; do
     case "$1" in
+        -u)
+            upackages+="$2 "
+            shift 2
+            ;;
         -p)
             packages+="$2 "
             shift 2
+            ;;
+        -o)
+            obsoletes="--setopt=obsoletes=0"
+            shift 1
             ;;
         -r)
             rpmfiles+="$2 "
@@ -82,10 +94,18 @@ sudo rm -rf rm -rf /var/cache/yum
 
 cd ~/rpmbuild
 
+## Uninstall PACKAGES
+if [ -n "$upackages" ]; then
+    echo "Uninstalling Yum Packages ..."
+    sudo yum -y erase $upackages
+    rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
+    echo "Done uninstalling Yum Packages"
+fi
+
 ## Install PACKAGES
 if [ -n "$packages" ]; then
     echo "Installing Yum Packages ..."
-    sudo yum -y $skip_broken install $packages
+    sudo yum -y $skip_broken $obsoletes install $packages
     rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
     echo "Done installing Yum Packages"
 fi
@@ -93,10 +113,11 @@ fi
 ## Install RPMS
 if [ -n "$rpmfiles" ]; then
     echo "Installing RPMs ..."
-    sudo yum -y $skip_broken localinstall $rpmfiles
+    sudo yum -y $skip_broken $obsoletes localinstall $rpmfiles
     rc=$?; if [[ $rc != 0 ]]; then exit $rc; fi
     echo "Done installing built RPMs"
 fi
+
 
 ## Build Spec
 echo "BUILDING: $@ ..."
