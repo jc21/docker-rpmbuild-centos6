@@ -39,6 +39,9 @@ pipeline {
   }
   post {
     success {
+      build job: 'Docker/docker-rpmbuild-centos6/cpp11', wait: false
+      build job: 'Docker/docker-rpmbuild-centos6/golang', wait: false
+      build job: 'Docker/docker-rpmbuild-centos6/rust', wait: false
       juxtapose event: 'success'
       sh 'figlet "SUCCESS"'
     }
