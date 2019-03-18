@@ -8,7 +8,7 @@ pipeline {
   }
   environment {
     IMAGE      = "rpmbuild-centos6"
-    TAG        = "golang
+    TAG        = "golang"
     TEMP_IMAGE = "rpmbuild6_${TAG}_${BUILD_NUMBER}"
   }
   stages {
