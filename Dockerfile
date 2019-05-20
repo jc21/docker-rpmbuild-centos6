@@ -7,7 +7,7 @@ USER root
 
 # jc21 yum and golang 1.12+
 RUN yum localinstall -y https://yum.jc21.com/jc21-yum.rpm \
- && yum update \
+ && yum -y update \
  && yum -y install golang \
  && yum clean all \
  && rm -rf /var/cache/yum
