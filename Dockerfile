@@ -9,7 +9,9 @@ USER root
 RUN yum -y install cmake \
     && yum clean all \
     && rm -rf /var/cache/yum \
-    && curl -sSf https://static.rust-lang.org/rustup.sh | sh
+    && wget curl https://sh.rustup.rs -O /tmp/install-rust.sh \
+    && chmod +x /tmp/install-rust.sh \
+    && /tmp/install-rust.sh -y
 
 USER rpmbuilder
 
