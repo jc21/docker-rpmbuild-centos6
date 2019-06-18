@@ -14,4 +14,6 @@ RUN yum -y install cmake \
 
 USER rpmbuilder
 
-RUN /tmp/install-rust.sh -y
+RUN /tmp/install-rust.sh -y \
+  && echo "export PATH=\"\$HOME/.cargo/bin:\$PATH\"" >> /home/rpmbuilder/.bashrc
+
